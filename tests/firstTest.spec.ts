@@ -52,5 +52,16 @@ test('User facing locators', async({page}) => {
 })
 
 test('locating child element', async({page}) => {
-  
+  // Option 1
+  await page.locator('nb-card nb-radio :text-is("Option 1")').click()
+  await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click()
+
+  // Option 2
+  await page.locator('nb-card').getByRole('button', {name: 'Sign In'}).first().click()
+
+  // NOT RECOMMENG: USE SEARCHING BY INDEX -> web elements can be changed on the web page.
+  await page.locator('nb-card').nth(3).getByRole('button').click()
+
+  // TIPS:
+  // - Always try to dind unique elements without using index ir the order of the web elemnents
 })
