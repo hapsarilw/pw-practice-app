@@ -110,3 +110,26 @@ test('extracting values', async({page}) => {
   const placeholderValue = await emailField.getAttribute('placeholder')
   expect(placeholderValue).toEqual('Email')
 })
+
+test('assertions', async({page}) => {
+  // 2 types of assertions -> 
+  // General asertions : not wait & perform the assertion when its time to execute
+  // Locator assertions : can interact with web elements & methods of the locator assertions will wait up to five seconds for the element to be available
+  // Soft assertions : .soft -> not failed and will continue to execute
+  
+  const basicFormButton = page.locator('nb-card').filter({hasText: "Basic form"}).locator('button')
+  
+  // General assertions
+  const value = 5
+  expect(value).toEqual(5)
+
+  const text = await basicFormButton.textContent()
+  expect(text).toEqual('Submit')
+
+  // Locator assertion
+  await expect(basicFormButton).toHaveText('Submit')
+
+  // Soft Assertion
+  await expect.soft(basicFormButton).toHaveText('Submit')
+  await basicFormButton.click()
+})
