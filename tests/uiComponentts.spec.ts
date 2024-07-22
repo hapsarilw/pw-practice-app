@@ -195,25 +195,33 @@ test("datepicker", async ({ page }) => {
   const calenderInputField = page.getByPlaceholder("Form Picker");
   await calenderInputField.click();
 
-  let date = new Date()
-  date.setDate(date.getDate() + 200)
-  const expectedDate = date.getDate().toString()
-  const expectedMonthShot = date.toLocaleDateString('En-US', {month: 'short'})
-  const expectedMonthLong = date.toLocaleDateString('En-US', {month: 'long'})
-  const expectedYear = date.getFullYear()
-  const dateToAssert = `${expectedMonthShot} ${expectedDate}, ${expectedYear}`
+  let date = new Date();
+  date.setDate(date.getDate() + 200);
+  const expectedDate = date.getDate().toString();
+  const expectedMonthShot = date.toLocaleDateString("En-US", {
+    month: "short",
+  });
+  const expectedMonthLong = date.toLocaleDateString("En-US", { month: "long" });
+  const expectedYear = date.getFullYear();
+  const dateToAssert = `${expectedMonthShot} ${expectedDate}, ${expectedYear}`;
 
-  let calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
-  const expectedMonthAndYear = ` ${expectedMonthLong} ${expectedYear}`
+  let calendarMonthAndYear = await page
+    .locator("nb-calendar-view-mode")
+    .textContent();
+  const expectedMonthAndYear = ` ${expectedMonthLong} ${expectedYear}`;
 
-  while(!calendarMonthAndYear.includes(expectedMonthAndYear)){
-    await page.locator('nb-calendar-pageable-navigation [data-name="chevron-right"]').click()
-    calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+  while (!calendarMonthAndYear.includes(expectedMonthAndYear)) {
+    await page
+      .locator('nb-calendar-pageable-navigation [data-name="chevron-right"]')
+      .click();
+    calendarMonthAndYear = await page
+      .locator("nb-calendar-view-mode")
+      .textContent();
   }
 
   await page
     .locator('[class="day-cell ng-star-inserted"]')
-    .getByText(expectedDate, {exact: true})
+    .getByText(expectedDate, { exact: true })
     .click();
-  await expect(calenderInputField).toHaveValue(dateToAssert)
+  await expect(calenderInputField).toHaveValue(dateToAssert);
 });
