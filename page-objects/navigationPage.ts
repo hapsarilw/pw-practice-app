@@ -10,27 +10,27 @@ export class NavigationPage {
 
   async formLayoutsPage() {
     await this.selectGroupMenuItem("Forms");
-    await this.page.getByAltText('Form Layouts').click();
+    await this.page.getByText('Form Layouts').click();
   }
 
   async datepickerPage() {
     await this.selectGroupMenuItem("Forms")
-    await this.page.getByAltText('Datepicker').click();
+    await this.page.getByText('Datepicker').click();
   }
 
   async smartTablePage() {
     await this.selectGroupMenuItem("Tables & Data");
-    await this.page.getByAltText('Smart Table').click();
+    await this.page.getByText('Smart Table').click();
   }
 
   async toastPage() {
     await this.selectGroupMenuItem("Modal & Overlays");
-    await this.page.getByAltText('Toast').click();
+    await this.page.getByText('Toast').click();
   }
 
   async tooltipPage() {
     await this.selectGroupMenuItem("Modal & Overlays");
-    await this.page.getByAltText('Tooltip').click();
+    await this.page.getByText('Tooltip').click();
   }
 
   private async selectGroupMenuItem(groupItemTitle: string){
